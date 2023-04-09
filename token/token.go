@@ -11,15 +11,24 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	// Identifiers + literals
+	// Identifiers + literals.
 	IDENT = "IDENT" // add, foobar, x, y, ...
 	INT   = "INT"   // 1343456
 
-	// Operators
-	ASSIGN = "="
-	PLUS   = "+"
+	// Operators.
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
+	LT       = "<"
+	GT       = ">"
 
-	// Delimiters
+	EQ     = "=="
+	NOT_EQ = "!="
+
+	// Delimiters.
 	COMMA     = ","
 	SEMICOLON = ";"
 	LPAREN    = "("
@@ -27,14 +36,24 @@ const (
 	LBRACE    = "{"
 	RBRACE    = "}"
 
-	// Keywords
+	// Keywords.
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 // LookupIdent is used to tell user-defined identifiers apart from language keywords.
