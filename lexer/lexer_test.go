@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"monkey.interpreter/token"
+	"monkey/token"
 )
 
 type expectedTokenTypeLiteral struct {

@@ -3,7 +3,7 @@ package ast
 import (
 	"bytes"
 
-	"monkey.interpreter/token"
+	"monkey/token"
 )
 
 // Expressions produce values, statements don't.
