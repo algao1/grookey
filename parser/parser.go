@@ -20,6 +20,28 @@ const (
 	CALL        // myFunction(X)
 )
 
+// When parseExpression is called the value of precedence stands for the current “right-binding
+// power” of the current parseExpression invocation. The higher it is, the more
+// tokens/operators/operands to the right of the current expressions (the future peek tokens)
+// can we “bind” to it.
+//
+// From our call to peekPrecedence, the value this call returns stands for the left-binding power
+// of the next operator, of p.peekToken.
+//
+// It all comes down to the precedence < p.peekPrecedence() condition of our for-loop. This
+// condition checks if the left-binding power of the next operator/token is higher than our current
+// right-binding power. If it is, what we parsed so far gets “sucked in” by the next operator, from
+// left to right, and ends up being passed to the infixParseFn of the next operator.
+//
+// Notable is that in our parser, every token has the same right- and left-binding power. We simply
+// use one value (in our precedences table) as both. What this value means changes depending on
+// the context.
+//
+// If an operator should be right-associative instead of left-associative (in the case of + that
+// would result in (a + (b + c)) instead of ((a + b) + c), then we must use a smaller “right-binding
+// power” when parsing the “right arm” of the operator expression. If you think about the ++ and
+// -- operators in other languages, where they can be used in a pre- and a postfix position, you
+// can see why it’s sometimes useful to have differing left- and right-binding powers for operators.
 var precedences = map[token.TokenType]int{
 	token.EQ:       EQUALS,
 	token.NOT_EQ:   EQUALS,
